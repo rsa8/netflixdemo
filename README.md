@@ -25,22 +25,25 @@ Get started with Angular, learn the fundamentals and explore advanced topics on 
 
 ### Setting Up a Project
 
+
 Install the Angular CLI globally:
 
 ```
 npm install -g @angular/cli
 ```
 
-Create workspace:
+Download the repository.
+Go to the project folder.  
+cd [PROJECT NAME]
 
-```
-ng new [PROJECT NAME]
-```
+Run command.
+`npm install`.
+
+If error occur type.
+`npm install --legacy-peer-deps`
 
 Run the application:
-
 ```
-cd [PROJECT NAME]
 ng serve
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
