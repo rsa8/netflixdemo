@@ -1,0 +1,69 @@
+  <div class="modal-header">
+    <youtube-player
+      class="video"
+      [playerVars]="playerConfig"
+      [videoId]="id"
+      [width]="800"
+      suggestedQuality="hd720"
+      (ready)="savePlayer($event)"
+      (change)="onStateChange($event)">
+    </youtube-player>
+	</div>
+	<div class="modal-body">
+			<div class="mb-3">
+        <div class="row mb-3">
+          <div class="col-md-8">
+            <button class="buttonPlay" type="button" class="btn btn-outline-dark" (click)="showMovie(movie.id, $event)" >Play</button>
+          </div>
+          <div class="col-md-4">
+            <i class="fa fa-heart favorite-icon {{isFav ? 'selected' : ''}}" (click)="addFavoriteMovie(movie, casts, moviesDetails);" data-toggle="tooltip" title="{{ isFav ? 'Remove from favorites' : 'Add to favorites'}}"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="padding20">
+              <ul>
+                <li>{{ movie.release_date | date: 'YYYY' }}</li>
+                <li>ImDB: {{ movie.vote_average }}</li>
+              </ul>
+              <p>{{ movie.overview }} </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="padding20">
+              <label class="labeltitle">Genre: </label>
+              <ul>
+                <li *ngFor="let genres of movie.genre_ids">
+                  <label [innerHTML]="genres == 28 ? 'Action,' : '' " ></label>
+                  <label [innerHTML]="genres == 12 ? 'Adventure,' : '' " ></label>
+                  <label [innerHTML]="genres == 16 ? 'Animation,' : '' " ></label>
+                  <label [innerHTML]="genres == 35 ? 'Comedy' : '' " ></label>
+                  <label [innerHTML]="genres == 80 ? 'Crime' : '' " ></label>
+                  <label [innerHTML]="genres == 99 ? 'Documentary' : '' " ></label>
+                  <label [innerHTML]="genres == 18 ? 'Drama' : '' " ></label>
+                  <label [innerHTML]="genres == 10751 ? 'Family' : '' " ></label>
+                  <label [innerHTML]="genres == 14 ? 'Fantasy' : '' " ></label>
+                  <label [innerHTML]="genres == 36 ? 'History' : '' " ></label>
+                  <label [innerHTML]="genres == 27 ? 'Horror' : '' " ></label>
+                  <label [innerHTML]="genres == 10402 ? 'Music' : '' " ></label>
+                  <label [innerHTML]="genres == 9648 ? 'Mystery' : '' " ></label>
+                  <label [innerHTML]="genres == 10749 ? 'Romance' : '' " ></label>
+                  <label [innerHTML]="genres == 878 ? 'Science Fiction' : '' " ></label>
+                  <label [innerHTML]="genres == 10770 ? 'Tv Movie' : '' " ></label>
+                  <label [innerHTML]="genres == 53 ? 'Thriller' : '' " ></label>
+                  <label [innerHTML]="genres == 10752 ? 'War' : '' " ></label>
+                  <label [innerHTML]="genres == 37 ? 'Western' : '' " ></label>
+                </li>
+              </ul>
+              <label class="labeltitle">Cast: </label>
+              <ul>
+                <li *ngFor="let cast of casts">{{ cast.name }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+			</div>
+	</div>
+	<div class="modal-footer">
+    <button type="button" class="btn-close  btn-close-white" aria-label="Close" (click)="modalService.dismissAll()" ></button>
+	</div>

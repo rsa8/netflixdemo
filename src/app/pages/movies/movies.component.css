@@ -1,0 +1,11 @@
+.container-movies {
+  background-color: #141414;
+  min-height: 100vh;
+  padding-top: 60px;
+}
+.container-home h1 {
+  color: white;
+}
+.form-group {
+  color:aliceblue
+}

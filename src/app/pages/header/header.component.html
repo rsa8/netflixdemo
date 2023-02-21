@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" *ngIf="validateShowHeader()">
+  <a class="navbar-brand text-danger ml-5" routerLink="/">Netflix</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="/">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/movies">Movies</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/list">My list</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" style="cursor: pointer;" (click)="logout()"  [ngClass]="isAuthenticated ? 'show' : 'hide' ">Logout</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li *ngIf="!currentUser" routerLinkActive="active"><a class="nav-link" routerLink="/register" [ngClass]="isAuthenticated ? 'hide' : 'show' " >Register</a></li>
+        <li *ngIf="!currentUser" routerLinkActive="active"><a class="nav-link" routerLink="/login"  [ngClass]="isAuthenticated ? 'hide' : 'show' ">Login</a></li>
+        <li *ngIf="currentUser" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="mr-2" *ngIf="currentUser && currentUser.profileSelected" src="/assets/images/profile{{(currentUser.profileSelected.indexImg + 1)}}.png" width="24" height="24" alt="">
+                Profile
+            </a>
+            <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="profileDropdown" *ngIf="currentUser && currentUser.profiles">
+                <a class="dropdown-item text-light" *ngFor="let profile of currentUser.profiles; let index = index" (click)="setProfile(profile, index)" routerLink="/">
+                    <div *ngIf="currentUser.profileSelected.id !== profile.id">
+                        <img src="/assets/images/profile{{(index+1)}}.png" width="32" height="32" alt="">
+                        <span class="ml-2">{{profile.name | titlecase}}</span>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-light" routerLink="/profile">Account</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-light" (click)="logout()">logout</a>
+            </div>
+        </li>
+    </ul>
+  </div>
+</nav>

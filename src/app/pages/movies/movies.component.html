@@ -1,0 +1,17 @@
+<div class="container-fluid container-movies">
+  <div class="row mb-5">
+    <div class="col-xs-12 col-md-6 offset-md-3">
+      <div class="form-group">
+        <label for="genderList">Select list:</label>
+        <input
+          class="form-control"
+          (input)="searchMovie($event)"
+        >
+        <!-- <select class="form-control" id="genderList" [(ngModel)]="selectedGender">
+          <option selected="{{selectedGender === gender.description ? 'selected' : ''}}" value="{{gender.id}}" *ngFor="let gender of genders">{{gender.description}}</option>
+        </select> -->
+      </div>
+    </div>
+  </div>
+  <app-movies-grid [moviesSearch]="movies" [isSearch]="true"></app-movies-grid>
+</div>

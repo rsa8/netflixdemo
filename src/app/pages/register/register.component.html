@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <h4 class="navbar-brand text-danger ml-5">Netflix-Demo</h4>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!--<ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="/">Inicio<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>-->
+      <ul class="navbar-nav ml-auto">
+        <li routerLinkActive="active"><a class="nav-link" routerLink="/login">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4 offset-md-4">
+      <div class="card card-login">
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <h2>Register</h2>
+            <div class="form-group">
+              <label for="email">Email address  </label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                required
+                aria-describedby="emailHelp"
+                formControlName="email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                id="password"
+                required
+                formControlName="password">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-lg btn-block" [disabled]="!registerForm.valid" >Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

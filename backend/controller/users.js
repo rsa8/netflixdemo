@@ -6,65 +6,93 @@ const jwt = require('jsonwebtoken');
 const { lookup } = require('geoip-lite');
 
 exports.login = (req, res, next) => {
-  console.log(req.body);
-    let fetchedUser;
-    Users.findOne({ email: req.body.email })
-    .then(result => {
-        if (!result) {
-          return res.status(401).json({
-              message: 'Invalid Email'
-          });
-        }
-        fetchedUser = result;
-        return bcrypt.compare(req.body.password, result.password);
-    })
-    .then(result =>{
 
-        if (!result) {
-            return res.status(401).json({
-                message: 'Invalid Password'
-            })
+    Users.findOne({
+      email: req.body.email,
+    })
+      .exec((err, user) => {
+        console.log(err);
+        if (err) {
+          res.status(200).send({ message: err, token:'', expiresIn: 0 , status: 0, user: ''  });
+          return;
+        }
+        if (!user) {
+          return res.status(200).send({ message: "User Not found.", token:'', expiresIn: 0 , status: 0, user: '' });
+        }
+        var passwordIsValid = bcrypt.compareSync(
+          req.body.password,
+          user.password
+        );
+        if (!passwordIsValid) {
+          console.log('sdfsdf');
+          return res.status(200).send({ message: "Invalid Password!", token:'', expiresIn: 0, status: 0, user: ''  });
         }
         const token = jwt.sign(
-            { email: fetchedUser.email, id: fetchedUser._id },
-            'secret_key_this_should_be_longer',
-            { expiresIn: '1h' }
-        );
-        res.status(201).json({
-            token: token,
-            user: fetchedUser,
-            expiresIn: 3600
+          { email: user.email, id: user._id },
+          'secret_key_this_should_be_longer',
+          { expiresIn: '1h' });
+
+       // req.session.token = token;
+        res.status(200).send({
+          token: token,
+          status: 1,
+          message: 'Logged in',
+          expiresIn: 3600,
+          user: user.email,
         });
-    })
-    .catch(err => {
-        console.log("Error block" + err);
-        res.status(401).json({
-            message: err.message
-        })
-    })
-}
+      });
+  }
 
 exports.signup = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-        const user = new Users({
-            email: req.body.email,
-            password: hash
+    // Email
+    Users.findOne({
+      email: req.body.email
+    }).exec((err, user) => {
+      if (err) {
+        res.status(500).send({
+          message: err,
+          user: " ",
+          status: 0
         });
-        user.save()
-        .then(createdUser => {
-            console.log(createdUser);
-            res.status(201).json({
-                message: "user added successfully",
-                user: createdUser
-            });
-        })
-        .catch(err => {
-            res.status(401).json({
-                message: "user not added",
-                user: ""
-            });
-        })
+        return;
+      }
+
+      if (user) {
+        console.log("sdfsdf" + user)
+        res.status(200).send({
+          message: "Failed! Email is already in use!",
+          user: " ",
+          status: 0
+        });
+        return;
+      } else {
+        bcrypt.hash(req.body.password, 10)
+          .then(hash => {
+              const user = new Users({
+                  email: req.body.email,
+                  password: hash
+              });
+              user.save((err, user) => {
+                if (err) {
+                  console.log(err);
+                  res.status(201).json({
+                    message: "Account Created please login",
+                    user: '',
+                    status: 1
+                  });
+                  return;
+                }
+                if (user) {
+                  console.log("asfewd dcsdf" + user);
+                  res.status(201).json({
+                    message: "Account Created please login",
+                    user: user,
+                    status: 1
+                });
+                }
+              })
+          });
+        }
     });
 }
 
@@ -81,21 +109,43 @@ exports.getSystemInfo = (req, res, next) => {
       systemInfo: info
     }
   }
+  SystemInfo.findOne({ ip: ip })
+  .exec((err, sys) => {
+    if(err) {
+      res.status(200).json({
+        message: "error",
+        geo: "",
+        info: ""
+      })
+      return;
+    }
+    if(sys) {
+      res.status(200).json({
+        message: ip,
+        geo: "",
+        info: ""
+      })
+      return
+    } else {
+      const system = new SystemInfo({
+        info: a
+      });
 
-  const system = new SystemInfo({
-    info: a
-  });
-  system.save()
-  .then(result => {
-    res.status(200).json({
-      message: ip,
-      geo: lookup(ip),
-      info: info
-    })
-  })
-  .catch(error => {
-    res.status(404).json({
-      message: error
-    })
+      system.save()
+      .then(result => {
+        res.status(200).json({
+          message: ip,
+          geo: lookup(ip),
+          info: info
+        })
+      })
+      .catch(error => {
+        res.status(404).json({
+          message: error,
+          geo: "",
+          info: ""
+        })
+      })
+    }
   })
 }

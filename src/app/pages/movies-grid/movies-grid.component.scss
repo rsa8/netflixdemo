@@ -1,0 +1,180 @@
+.card {
+  margin: 3px;
+  transition: all linear .2s;
+  cursor: pointer;
+  background-color: #222222;
+  color: white;
+  background-size: fill;
+  border-radius: inherit !important;
+  height: auto !important;
+}
+.card2 {
+  margin: 3px;
+  transition: all linear .2s;
+  cursor: pointer;
+  background-color: #222222;
+  color: white;
+  background-size: fill;
+  border-radius: inherit !important;
+}
+.h50 {
+  height: 50px
+}
+/* .card:hover {
+  transition-delay: .5s;
+  transform: scale(1.2);
+  z-index: 10;
+  box-shadow: inset 0px -40px 120px 31px #000000;
+} */
+@media only screen and (max-width: 600px) {
+  carousel {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 360px) {
+  carousel {
+    width: 100% !important;
+  }
+}
+carousel {
+  z-index: 44 !important;
+}
+.col-md-3 {
+  padding: 0;
+}
+.mrt-10 {
+  margin-top: 10px;
+}
+
+.card:hover .favorite-icon {
+  transition-delay: .5s;
+  visibility: visible;
+}
+.favorite-icon {
+  transition: .3s all;
+  visibility: hidden;
+  z-index: 50;
+}
+.favorite-icon:hover {
+  color: crimson;
+  transform: scale(1.3);
+}
+.favorite-icon.selected {
+  visibility: visible;
+  color: crimson;
+}
+
+#heading {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+}
+.carousel-outer {
+  padding: 0 0 50px;
+  position: relative;
+  margin-top: 18px;
+}
+.carousel-cell {
+  overflow: visible !important;
+  z-index: 9 !important;
+
+}
+.carousel-cell:hover{
+  z-index: 99 !important;
+}
+.grid-box {
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
+}
+.grid-box:hover{
+  -moz-transform: scale(1.25);
+  -webkit-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  transform: scale(1.25);
+}
+.image {
+  display: block;
+  width: 100%;
+  object-fit: fill !important;
+  border-radius: 5px;
+  /* height: 165px !important; */
+}
+.details {
+  border: 2px solid rgb(197, 197, 197);
+  border-radius: 18px;
+  padding: 7px;
+  color:rgb(197, 197, 197);
+}
+.card:hover {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transform-origin: center bottom;
+  border-radius: 5px;
+  /* height: 200px !important; */
+}
+.font-size-13 {
+  font-size: 13px;
+}
+.moviesgenres-title {
+  color: #fff;
+}
+.pad10 {
+  padding: 4px 2px;
+  margin-left: 10px;
+}
+.show {
+  display: block !important;
+}
+.hide {
+  display: none !important;
+}
+
+.owl-carousel .nav-btn{
+  height: 47px;
+  position: absolute;
+  width: 26px;
+  cursor: pointer;
+  top: 100px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled{
+pointer-events: none;
+opacity: 0.2;
+}
+
+.owl-carousel .prev-slide{
+  /* background: url(nav-icon.png) no-repeat scroll 0 0; */
+  left: -33px;
+}
+.owl-carousel .next-slide{
+  /* background: url(nav-icon.png) no-repeat scroll -24px 0px; */
+  right: -33px;
+}
+.owl-carousel .prev-slide:hover{
+ background-position: 0px -53px;
+}
+.owl-carousel .next-slide:hover{
+background-position: -24px -53px;
+}
+.owl-prev {
+  color: #FFF;
+  font-size: 14px !important;
+  margin: 5px;
+  padding: 4px 32px !important;
+  background: #303030 !important;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px;
+}

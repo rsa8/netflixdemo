@@ -1,0 +1,25 @@
+.container-fluid {
+  background-color: #141414;
+  min-height: 100vh;
+  background-image: url("/assets/images/login-bg.jpg");
+  background-size: cover;
+}
+
+.card-login {
+  background-color: whitesmoke;
+}
+
+.login-title {
+  font-size: 2em;
+  padding: 8px
+}
+.signup {
+  padding:8px;
+}
+.error {
+  color:red;
+  font-size: 12px;
+}
+.mrt-100 {
+  margin-top: 130px;
+}

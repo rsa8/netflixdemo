@@ -1,0 +1,20 @@
+<div class="container-fluid container-home">
+  <div class="row">
+      <div class="col">
+          <a class="back-button" routerLink="/"><i class="fa fa-arrow-circle-left"></i></a>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col d-flex justify-content-center">
+          <youtube-player
+            class="video"
+            [playerVars]="playerConfig"
+            [videoId]="id"
+            [width]="1400"
+            suggestedQuality="hd720"
+            (ready)="savePlayer($event)"
+            (change)="onStateChange($event)">
+          </youtube-player>
+      </div>
+  </div>
+</div>

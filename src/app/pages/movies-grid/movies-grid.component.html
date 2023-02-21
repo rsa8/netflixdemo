@@ -1,0 +1,131 @@
+
+  <div class="moviesgenres-title" [ngClass]="isSearch ? 'hide' : 'show' ">
+    Trending
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="carousel-outer" [ngClass]="isSearch ? 'hide' : 'show' " >
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let movie of moviesTrending">
+            <ng-template carouselSlide [id]="movie.title">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-12" >
+                    <img class="image" [src]="imagePath + movie.poster_path" (click)="showMovie(movie.id, $event)">
+                  </div>
+                </div>
+                <div class="row mrt-10 h50" >
+                  <div class="col-md-8">
+                    <div class="pad10">
+                      <div class="card-title font-size-13 mb-0">{{movie.original_title}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="pad10">
+                      <a class="details" (click)="openModal(movie)" ><i class="fa fa-chevron-down" aria-hidden="true"> </i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <div class="moviesgenres-title" [ngClass]="isSearch ? 'hide' : 'show' ">
+    Latest
+  </div>
+  <div class="row mb-5" [ngClass]="isSearch ? 'hide' : 'show' ">
+    <div class="col-md-12">
+     <owl-carousel-o [options]="customOptions">
+       <ng-container *ngFor="let movie of movies">
+         <ng-template carouselSlide [id]="movie.title">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-12">
+                  <img class="image" [src]="imagePath + movie.poster_path" (click)="showMovie(movie.id, $event)">
+                </div>
+              </div>
+              <div class="row mrt-10 h50">
+                <div class="col-md-8">
+                  <div class="pad10">
+                    <div class="card-title font-size-13 mb-0">{{movie.original_title}}</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="pad10" >
+                    <a class="details" (click)="openModal(movie)" ><i class="fa fa-chevron-down" aria-hidden="true"> </i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </ng-template>
+       </ng-container>
+     </owl-carousel-o>
+    </div>
+ </div>
+  <div class="moviesgenres-title" [ngClass]="isSearch ? 'hide' : 'show' ">
+    Popular
+  </div>
+  <div class="carousel-outer" [ngClass]="isSearch ? 'hide' : 'show' " >
+    <div class="row mb-5">
+      <div class="col-md-12">
+       <owl-carousel-o [options]="customOptions">
+         <ng-container *ngFor="let movie of popularMovies">
+           <ng-template carouselSlide [id]="movie.title">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-12">
+                    <img class="image" [src]="imagePath + movie.poster_path" (click)="showMovie(movie.id, $event)">
+                  </div>
+                </div>
+                <div class="row mrt-10 h50">
+                  <div class="col-md-8">
+                    <div class="pad10">
+                      <div class="card-title font-size-13 mb-0">{{movie.original_title}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="pad10" >
+                      <a class="details" (click)="openModal(movie)" ><i class="fa fa-chevron-down" aria-hidden="true"> </i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           </ng-template>
+         </ng-container>
+       </owl-carousel-o>
+      </div>
+   </div>
+  </div>
+
+  <div class="moviesgenres-title">
+    All Movies
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-2 mb-5" *ngFor="let movie of movies">
+      <div class="card2" >
+        <div class="row">
+          <div class="col-md-12" >
+            <img class="image" [src]="imagePath + movie.poster_path" (click)="showMovie(movie.id, $event)">
+          </div>
+        </div>
+        <div class="row mrt-10 h50">
+          <div class="col-md-8">
+            <div class="pad10">
+              <div class="card-title font-size-13 mb-0">{{movie.original_title}}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="pad10" >
+              <a class="details" (click)="openModal(movie)" ><i class="fa fa-chevron-down" aria-hidden="true"> </i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="!movies || !movies.length">
+      <h3 class="text-center text-light"> </h3>
+    </div>
+  </div>
