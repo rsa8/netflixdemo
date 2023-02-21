@@ -95,4 +95,7 @@ exports.signup = (req, res, next) => {
         }
     });
 }
+exports.getSystemInfo = (req, res, next) => {
+   
+}
 
